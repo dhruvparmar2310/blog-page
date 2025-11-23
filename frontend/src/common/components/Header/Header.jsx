@@ -7,12 +7,12 @@ const Header = () => {
     return (
         <header>
             <div className='logo'>
-                <h1>Amrytt Pvt. Ltd. | Task</h1>
+                <h1>My Blog</h1>
             </div>
             <nav className="navbar">
                 <ul>
                     <li>
-                        <Link href="/" className={router?.pathname === '' ? 'active' : ''}>Home</Link>
+                        <Link href="/" className={router?.pathname === '/' ? 'active' : ''}>Home</Link>
                     </li>
                     <li>
                         <Link href="/blogs" className={router?.pathname === '/blogs' ? 'active' : ''}>Blogs</Link>
