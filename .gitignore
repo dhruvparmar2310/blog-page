@@ -1,0 +1,79 @@
+# ============================================
+# Global ignores
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# ============================================
+# Environment variables
+# ============================================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+backend/.env
+frontend/.env
+
+# ============================================
+# Frontend (Next.js)
+# ============================================
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+frontend/.cache/
+frontend/dist/
+
+# Next.js build output
+.next/
+out/
+
+# ============================================
+# Backend (Node.js / Express)
+# ============================================
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/.cache/
+
+# ============================================
+# Logs
+# ============================================
+logs
+*.log
+logs/*.log
+
+# PM2 logs
+.pids
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================
+# OS Generated Files
+# ============================================
+Desktop.ini
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# ============================================
+# Editor / IDE
+# ============================================
+.vscode/
+.idea/
+*.swp
+
+# ============================================
+# Misc
+# ============================================
+*.env.*
+*.local
+*.backup
