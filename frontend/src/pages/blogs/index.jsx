@@ -1,11 +1,8 @@
-import Hero from "@/common/components/Hero/Hero";
 import { formatDate } from "@/utills/utills";
 import { useRouter } from "next/router";
-import BlogLayout from "./layout";
 
 export default function Blogs ({ blogs }) {
     const router = useRouter();
-    console.log('Blogs component received blogs prop:', blogs)
     return (
         <>
             <section className="blog-page container">
@@ -21,7 +18,6 @@ export default function Blogs ({ blogs }) {
                                 <div className="blog-card_content" dangerouslySetInnerHTML={{ __html: blog?.sContent?.slice(0, 200) + '...' }}></div>
                                 <button className="blog-card_read-more-btn" onClick={() => router.push({
                                     pathname: `/blogs/${blog.sTitle}/${blog._id}`,
-                                    // query: { id: blog._id }
                                 })}>Read More</button>
                             </div>
                         )

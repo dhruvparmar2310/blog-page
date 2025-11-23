@@ -9,34 +9,37 @@ const Testimonials = () => {
     const aTestimonialsData = [
         {
             _id: '0',
-            sName: "Alex Carter",
+            sName: 'Alex Carter',
             sImage: AlexImg,
-            sDescription: "With over a decade of experience in the fitness industry, Alex specializes in strength training and functional fitness. Certified by NASM and known for his motivational style, Alex designs workout programs that are both challenging and achievable. His passion lies in helping clients build strength and confidence through personalized training routines. Outside the gym, Alex is an avid runner and enjoys outdoor adventures."
+            sDescription:
+                'With over a decade of experience in the fitness industry, Alex specializes in strength training and functional fitness. Certified by NASM and known for his motivational style, Alex designs workout programs that are both challenging and achievable. His passion lies in helping clients build strength and confidence through personalized training routines. Outside the gym, Alex is an avid runner and enjoys outdoor adventures.'
         },
         {
             _id: '1',
-            sName: "Miranda Rachel",
+            sName: 'Miranda Rachel',
             sImage: MinandaImg,
-            sDescription: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure officiis hic consequatur nihil impedit corrupti nostrum debitis architecto illo libero magni rerum, explicabo ut minus, at odio. Dolor, dolorum eaque."
+            sDescription:
+                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure officiis hic consequatur nihil impedit corrupti nostrum debitis architecto illo libero magni rerum, explicabo ut minus, at odio. Dolor, dolorum eaque.'
         },
         {
             _id: '2',
-            sName: "Danielle Marsh",
+            sName: 'Danielle Marsh',
             sImage: DanielleImg,
-            sDescription: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad deserunt in saepe quos nesciunt, impedit enim! Tempore ullam repellat voluptatibus molestias animi voluptate, mollitia recusandae ut maxime quis hic laboriosam? Id neque beatae exercitationem dolores facere sunt, aspernatur libero placeat autem laborum ab possimus. Eveniet vero exercitationem facere quo deleniti? Corrupti, enim obcaecati dolore hic facere iste vero ea quas?"
+            sDescription:
+                'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad deserunt in saepe quos nesciunt, impedit enim! Tempore ullam repellat voluptatibus molestias animi voluptate, mollitia recusandae ut maxime quis hic laboriosam? Id neque beatae exercitationem dolores facere sunt, aspernatur libero placeat autem laborum ab possimus. Eveniet vero exercitationem facere quo deleniti? Corrupti, enim obcaecati dolore hic facere iste vero ea quas?'
         }
     ]
 
     const handlePrevBtn = () => {
-        setCurrentIndex((prev) => prev === 0 ? aTestimonialsData?.length - 1 : prev - 1)
+        setCurrentIndex((prev) => (prev === 0 ? aTestimonialsData?.length - 1 : prev - 1))
     }
 
     const handleNextBtn = () => {
-        setCurrentIndex((prev) => prev === aTestimonialsData?.length - 1 ? 0 : prev + 1)
+        setCurrentIndex((prev) => (prev === aTestimonialsData?.length - 1 ? 0 : prev + 1))
     }
     return (
         <div className='testimonial-section'>
-            {aTestimonialsData.slice(currentIndex, currentIndex + 1)?.map(user => {
+            {aTestimonialsData.slice(currentIndex, currentIndex + 1)?.map((user) => {
                 return (
                     <div key={user?._id} className='testimonial-card'>
                         <div className='testimonial-card_username'>
@@ -52,8 +55,12 @@ const Testimonials = () => {
                 )
             })}
             <div className='testimonial-card_control'>
-                <button type='button' onClick={handlePrevBtn}>Previous</button>
-                <button type='button' onClick={handleNextBtn}>Next</button>
+                <button type='button' onClick={handlePrevBtn}>
+                    Previous
+                </button>
+                <button type='button' onClick={handleNextBtn}>
+                    Next
+                </button>
             </div>
         </div>
     )

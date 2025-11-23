@@ -17,20 +17,20 @@ const BlogLayout = ({ children }) => {
   const router = useRouter()
   const { query } = useRouter()
 
-   const [width, setWidth] = useState(false)
+  const [width, setWidth] = useState(false)
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-          const changeWidth = () => {
-              setWidth(window.matchMedia('(max-width: 576px)').matches)
-          }
-          changeWidth()
-  
-          window.addEventListener('resize', changeWidth)
-          return () => {
-              window.removeEventListener('resize', changeWidth)
-          }
-      }, [])
+    const changeWidth = () => {
+      setWidth(window.matchMedia('(max-width: 576px)').matches)
+    }
+    changeWidth()
+
+    window.addEventListener('resize', changeWidth)
+    return () => {
+      window.removeEventListener('resize', changeWidth)
+    }
+  }, [])
 
   const aTourGuides = [
     {
@@ -56,6 +56,7 @@ const BlogLayout = ({ children }) => {
     }
   ]
 
+  // Fetching data without getStaticProps
   useEffect(() => {
     async function getAllBlogs() {
       try {
@@ -92,42 +93,43 @@ const BlogLayout = ({ children }) => {
             <h1 className='right-content_title'>Explore More</h1>
 
             <div className='right-content_cards'>
-              {width ? <ExploreMoreArticle blogs={blogs} query={query} /> :
-              blogs
-                ?.filter((item) => item?.sTitle !== query.slug?.[0])
-                ?.slice(0, 4)
-                ?.map((item) => {
-                  console.log('item', item)
-                  return (
-                    <>
-                      <div
-                        className='right-content_card'
-                        onClick={() =>
-                          router.push({
-                            pathname: `/blogs/${item.sTitle}/${item._id}`
-                            // query: { id: blog._id }
-                          })
-                        }
-                      >
-                        <div className='right-content_card-header'>
-                          <Image src={item?.sImage} alt='' quality={70} width={100} height={100} />
-                        </div>
-                        <div className='right-content_card-body'>
-                          <div className='right-content_top-content'>
-                            <h1>{item?.sTitle?.slice(0, 15)}</h1>
-                            <span className='seperator'>|</span>
-                            <span>{formatDate(item?.dCreatedDate)}</span>
+              {width ? (
+                <ExploreMoreArticle blogs={blogs} query={query} />
+              ) : (
+                blogs
+                  ?.filter((item) => item?.sTitle !== query.slug?.[0])
+                  ?.slice(0, 4)
+                  ?.map((item) => {
+                    return (
+                      <>
+                        <div
+                          className='right-content_card'
+                          onClick={() =>
+                            router.push({
+                              pathname: `/blogs/${item.sTitle}/${item._id}`
+                              // query: { id: blog._id }
+                            })
+                          }
+                        >
+                          <div className='right-content_card-header'>
+                            <Image src={item?.sImage} alt='' quality={70} width={100} height={100} />
                           </div>
-                          <div
-                            className='right-content_desc'
-                            dangerouslySetInnerHTML={{ __html: item?.sContent?.slice(0, 50) + '...' }}
-                          ></div>
+                          <div className='right-content_card-body'>
+                            <div className='right-content_top-content'>
+                              <h1>{item?.sTitle?.slice(0, 15)}</h1>
+                              <span className='seperator'>|</span>
+                              <span>{formatDate(item?.dCreatedDate)}</span>
+                            </div>
+                            <div
+                              className='right-content_desc'
+                              dangerouslySetInnerHTML={{ __html: item?.sContent?.slice(0, 50) + '...' }}
+                            ></div>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  )
-                })
-              }
+                      </>
+                    )
+                  })
+              )}
             </div>
           </div>
           <div className='tour-guides'>
@@ -137,25 +139,25 @@ const BlogLayout = ({ children }) => {
                 return (
                   <div key={guide?._id} className='right-content_card'>
                     <div className='guide-top-content'>
-                    <div className='guide-profile'>
-                      <Image src={guide?.sImage} alt='' width={100} height={100} quality={70} />
-                    </div>
-                    <div className='guide-details'>
-                      <p>{guide?.sName}</p>
-                      <p className='guide-details_location'>
-                        <Image src={locationImg} alt='' width={100} height={100} quality={70} />
-                        {guide?.sLocation}
+                      <div className='guide-profile'>
+                        <Image src={guide?.sImage} alt='' width={100} height={100} quality={70} />
+                      </div>
+                      <div className='guide-details'>
+                        <p>{guide?.sName}</p>
+                        <p className='guide-details_location'>
+                          <Image src={locationImg} alt='' width={100} height={100} quality={70} />
+                          {guide?.sLocation}
                         </p>
-                    </div>
+                      </div>
                     </div>
                     <div className='guide-details_rating'>
-                        {Array?.from({ length: guide?.nRating })?.map(star => (
-                            <Image src={filledStar} alt='' width={100} height={100} key={star} />
-                        ))}
-                        {Array?.from({ length: 5 - Number(guide?.nRating) })?.map(star => (
-                            <Image src={emptyStar} alt='' width={100} height={100} key={star} />
-                        ))}
-                        <span>({guide?.nRating}.0)</span>
+                      {Array?.from({ length: guide?.nRating })?.map((star) => (
+                        <Image src={filledStar} alt='' width={100} height={100} key={star} />
+                      ))}
+                      {Array?.from({ length: 5 - Number(guide?.nRating) })?.map((star) => (
+                        <Image src={emptyStar} alt='' width={100} height={100} key={star} />
+                      ))}
+                      <span>({guide?.nRating}.0)</span>
                     </div>
                   </div>
                 )
@@ -164,7 +166,7 @@ const BlogLayout = ({ children }) => {
           </div>
         </section>
       </div>
-        <Comments />
+      <Comments />
     </>
   )
 }

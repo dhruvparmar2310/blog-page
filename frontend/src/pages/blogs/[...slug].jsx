@@ -19,7 +19,6 @@ const SpecificBlog = ({ blog }) => {
             window.removeEventListener('resize', changeWidth)
         }
     }, [])
-    console.log('width: ', width)
     return (
         <BlogLayout>
             <section className='blog-page specific-blog'>
@@ -42,32 +41,48 @@ const SpecificBlog = ({ blog }) => {
 export default SpecificBlog
 
 export async function getStaticPaths () {
-    const res = await fetch(`${process?.env.NEXT_PUBLIC_API_ENDPOINT}/blogs`);
-    const result = await res.json();
-    const blogs = result.data || [];
+    try {
+        const res = await fetch(`${process?.env.NEXT_PUBLIC_API_ENDPOINT}/blogs`);
+        const result = await res.json();
+        const blogs = result.data || [];
 
-    const paths = blogs.map((blog) => {
-        return ({
-            params: {
-                slug: [blog.sTitle, blog._id],
-            },
-        })
-    });
+        const paths = blogs.map((blog) => {
+            return ({
+                params: {
+                    slug: [blog?.sTitle, blog?._id],
+                },
+            })
+        });
 
-    return {
-        paths: [],
-        fallback: true,
-    };
+        return {
+            paths: [],
+            fallback: 'blocking',
+        };
+    } catch (error) {
+        console.error("getStaticPaths error:", error);
+
+        return {
+            paths: [],
+            fallback: "blocking",
+        }
+    }
 }
 
 export async function getStaticProps ({ params }) {
-    console.log('params: ', params)
-    const single = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/blogs/${params.slug[1]}`);
-    const singleResult = await single.json();
-    const blog = singleResult.data || {};
+    try {
+        const single = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/blogs/${params?.slug[1]}`);
+        const singleResult = await single.json();
+        const blog = singleResult.data || {};
 
-    console.log('blog: ', blog)
-    return {
-        props: { blog },
-    };
+        return {
+            props: { blog },
+            revalidate: 60,
+        };
+    } catch (error) {
+        console.error("getStaticProps error:", error);
+
+        return {
+            notFound: true,
+        }
+    }
 }
